@@ -1,6 +1,26 @@
 
 const generateBtn = document.getElementById('generate');
 const numbersContainer = document.querySelector('.numbers');
+const themeToggle = document.getElementById('theme-toggle');
+const body = document.body;
+
+// Check for saved theme
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    body.classList.add(savedTheme);
+    themeToggle.textContent = savedTheme === 'dark-mode' ? '☀️' : '🌙';
+}
+
+themeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    const isDarkMode = body.classList.contains('dark-mode');
+    
+    // Save preference
+    localStorage.setItem('theme', isDarkMode ? 'dark-mode' : '');
+    
+    // Update button icon
+    themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+});
 
 generateBtn.addEventListener('click', () => {
     const numbers = [];
